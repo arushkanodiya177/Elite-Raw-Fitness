@@ -22,7 +22,6 @@
     }, 1100);
   });
 
-  // Safety: hide loader even if load event is slow
   setTimeout(() => {
     if (!loader.classList.contains('hidden')) {
       loader.classList.add('hidden');
@@ -99,7 +98,6 @@
     const revealObserver = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // stagger children inside grids
           const parent = entry.target.parentElement;
           if (parent && (parent.classList.contains('facilities-grid') ||
                          parent.classList.contains('why-grid') ||
@@ -123,11 +121,10 @@
      GALLERY LIGHTBOX
      ============================================================ */
   const galleryImages = [
-    '5ca0f5cf-053e-49a9-baa5-5552add24801.jpeg',
-    '7eb127b0-a51d-4f9e-9020-56ac61fa00a3.jpeg',
-    '24a30bd5-0a6d-4f9e-9020-56ac61fa00a3.jpeg',
-    '74e7cd1a-56d4-46c9-a9e4-86cb1aad64a2.jpeg',
-    '01f560ac-455f-4ac1-b6d6-ea41d6f09659.jpeg'
+    'gym-1.jpeg',
+    'gym-2.jpeg',
+    'gym-3.jpeg',
+    'gym-4.jpeg'
   ];
 
   const lightbox = $('#lightbox');
@@ -213,7 +210,6 @@
   const validateForm = () => {
     let valid = true;
 
-    // Name
     const name = nameInput.value.trim();
     if (name.length < 2) {
       nameInput.classList.add('invalid');
@@ -223,7 +219,6 @@
       clearFieldError(nameInput, nameError);
     }
 
-    // Phone (Indian 10-digit)
     const phone = phoneInput.value.trim().replace(/\D/g, '');
     if (!/^[6-9]\d{9}$/.test(phone)) {
       phoneInput.classList.add('invalid');
@@ -233,7 +228,6 @@
       clearFieldError(phoneInput, phoneError);
     }
 
-    // Interest
     if (!interestSelect.value) {
       interestSelect.classList.add('invalid');
       showError(interestError, 'Please select a membership interest.');
@@ -326,7 +320,6 @@
 
   /* ============================================================
      NAVBAR LINK SMOOTH SCROLL FALLBACK
-     (for browsers without CSS scroll-behavior)
      ============================================================ */
   if (!('scrollBehavior' in document.documentElement.style)) {
     $$('a[href^="#"]').forEach(anchor => {
